@@ -52,20 +52,20 @@ public class Main {
 
         // БИНАРНЫЕ ФАЙЛЫ
         // СЕРИЛИЗАЦИЯ или запись бинарного файла
-        FileOutputStream fos = new FileOutputStream("data.bin");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeFloat(3.14f);
-        oos.writeBoolean(true);
-        oos.writeChar('!');
-
-        Player Sasch = new Player();
-        Sasch.name = "Sascha";
-        Sasch.setHealth(98.08f);
-        oos.writeObject(Sasch);
-
-        oos.flush();
-        oos.close();
-        fos.close();
+//        FileOutputStream fos = new FileOutputStream("data.bin");
+//        ObjectOutputStream oos = new ObjectOutputStream(fos);
+//        oos.writeFloat(3.14f);
+//        oos.writeBoolean(true);
+//        oos.writeChar('!');
+//
+//        Player Sasch = new Player();
+//        Sasch.name = "Sascha";
+//        Sasch.setHealth(98.08f);
+//        oos.writeObject(Sasch);
+//
+//        oos.flush();
+//        oos.close();
+//        fos.close();
 
 
         // ДЕСИРИЛИЗАЦИЯ или чтение из бинарного файла
@@ -78,7 +78,12 @@ public class Main {
         System.out.println(f);
         ois.readBoolean();
         ois.readChar();
-        Player p2 = (Player) ois.readObject();     // метод выдает объект класса Obj нужно его преобразовать в Pl
+        Player p2 = null;
+        try {
+            p2 = (Player) ois.readObject();     // метод выдает объект класса Obj нужно его преобразовать в Pl
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getCause());
+        }
         System.out.println(p2.name);
         System.out.println(p2.getHealth());
 
